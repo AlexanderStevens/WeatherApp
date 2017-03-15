@@ -27,15 +27,16 @@ class WeatherObject:NSObject {
             }
             
             do {
+                print("no error")
                 var forcastArray = [Forcast]()
                 
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:Any]
-                
+                print("json serialized")
                 let list = json["list"] as! [[String:AnyObject]]
-                var forcast = Forcast()
+               
                 
                 for item in list {
-                    
+                     var forcast = Forcast()
                     
                     let main = item["main"] as! [String:AnyObject]
                     let temp = main["temp"] as! NSNumber
@@ -45,7 +46,7 @@ class WeatherObject:NSObject {
                     
                     
                     let weather = item["weather"] as! [[String:AnyObject]]
-                    let weatherSet = weather[0]
+                    let weatherSet = weather.first! as [String:AnyObject]
                     
                     let weatherMain = weatherSet["main"] as! String
                     let weatherDescription = weatherSet["description"] as! String
@@ -71,15 +72,18 @@ class WeatherObject:NSObject {
                     forcast.clouds = clperc
                     forcast.windSpeed = windSpeed
                     forcast.windDeg = windDeg
+                    print("forcast value set")
                     
                     forcastArray.append(forcast)
-                    
+                    print("added to forcast array")
+                    print(forcastArray.count)
                     
                 }
                 
                 DispatchQueue.main.async(execute: { ()-> Void in
                     
                     completionHandler(forcastArray)
+                    print("data retuned")
                 })
               
             }

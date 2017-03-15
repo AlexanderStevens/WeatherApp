@@ -31,6 +31,8 @@
 		DB45765D1E295E820035D144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB45765C1E295E820035D144 /* Assets.xcassets */; };
 		DB4576601E295E820035D144 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB45765E1E295E820035D144 /* LaunchScreen.storyboard */; };
 		DB4576681E2963CB0035D144 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4576671E2963CB0035D144 /* Models.swift */; };
+		DBF3D5B31E79C178006FAAC8 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3D5B21E79C178006FAAC8 /* Util.swift */; };
+		DBF3D5B51E79CCB4006FAAC8 /* DayForcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3D5B41E79CCB4006FAAC8 /* DayForcastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		DB45765F1E295E820035D144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB4576611E295E820035D144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB4576671E2963CB0035D144 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		DBF3D5B21E79C178006FAAC8 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		DBF3D5B41E79CCB4006FAAC8 /* DayForcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayForcastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +99,9 @@
 				DB4576551E295E820035D144 /* AppDelegate.swift */,
 				DB4576571E295E820035D144 /* WeatherViewController.swift */,
 				DB4576671E2963CB0035D144 /* Models.swift */,
+				DBF3D5B41E79CCB4006FAAC8 /* DayForcastViewController.swift */,
 				DB4576591E295E820035D144 /* Main.storyboard */,
+				DBF3D5B21E79C178006FAAC8 /* Util.swift */,
 				DB45765C1E295E820035D144 /* Assets.xcassets */,
 				DB45765E1E295E820035D144 /* LaunchScreen.storyboard */,
 				DB4576611E295E820035D144 /* Info.plist */,
@@ -213,7 +219,9 @@
 			files = (
 				DB4576681E2963CB0035D144 /* Models.swift in Sources */,
 				DB4576581E295E820035D144 /* WeatherViewController.swift in Sources */,
+				DBF3D5B51E79CCB4006FAAC8 /* DayForcastViewController.swift in Sources */,
 				DB4576561E295E820035D144 /* AppDelegate.swift in Sources */,
+				DBF3D5B31E79C178006FAAC8 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
