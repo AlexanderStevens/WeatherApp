@@ -24,7 +24,8 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(CellHeader.self, forCellReuseIdentifier: cellHeadID)
         tableView.register(WeatherCell.self, forCellReuseIdentifier: weatherID)
         tableView.reloadData()
@@ -33,6 +34,8 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     @IBAction func searchForResults(_ sender: UIButton) {
+        
+        
         print("reguest made")
         myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         myActivityIndicator!.center = view.center
@@ -42,11 +45,16 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
         
         let location :String = self.serachField.text!
         
+        let serialQueue = DispatchQueue(label: "com.queue.Serial")
+        
+        
+        //Put weathe request in sync.sync 
+        
+        
         WeatherObject.fetchWeatherResults(location:location, completionHandler: {forcastArray in
             print("return from Weather Call")
             print(forcastArray.count)
             
-            let serialQueue = DispatchQueue(label: "com.queue.Serial")
             serialQueue.sync {
                
                 Util.convertToDays(jumbledDays: forcastArray, completionHandler: {convertedDays  in
@@ -59,19 +67,11 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
                     self.daysArray = convertedDays
                    
                 })
-               
-                
-                DispatchQueue.main.async{
-                    print("async reload")
-                     self.myActivityIndicator?.stopAnimating()
-                    self.tableView.reloadData()
-                }
 
+                self.myActivityIndicator?.stopAnimating()
+                self.tableView.reloadData()
 
             }
-            
-            
-            
             
         
         })
@@ -96,7 +96,8 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DayArray Count:")
         print(daysArray.count)
-        return daysArray.count
+        let rows = daysArray.count + 1
+        return rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

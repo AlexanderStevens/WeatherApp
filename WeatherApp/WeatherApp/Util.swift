@@ -15,10 +15,12 @@ class Util{
         print("In sort days function, Jumbled Count:")
         print(jumbledDays.count)
         var dayForcastArray = [Forcast]()
-    for item in jumbledDays {
-    
         
-        print(item.date_text)
+        //Last Dict is not added
+        
+        
+    for item in jumbledDays {
+        
         if (item.date_text?.contains("00:00:00"))! {
             print("new day, forcast count:")
             print(dayForcastArray.count)
@@ -34,6 +36,8 @@ class Util{
         }
         
     }
+        
+        
         DispatchQueue.main.async(execute: { ()-> Void in
         print("Day count")
             print(daysArray.count)
