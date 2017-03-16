@@ -36,7 +36,7 @@ class WeatherObject:NSObject {
                
                 
                 for item in list {
-                     var forcast = Forcast()
+                     let forcast = Forcast()
                     
                     let main = item["main"] as! [String:AnyObject]
                     let temp = main["temp"] as! NSNumber
@@ -60,7 +60,6 @@ class WeatherObject:NSObject {
                     let windDeg = wind["deg"] as! NSNumber
                     
                     let date_text = item["dt_txt"] as! String
-                    
                     
                     forcast.date_text = date_text
                     forcast.temperature = temp
@@ -87,15 +86,10 @@ class WeatherObject:NSObject {
                 })
               
             }
-                
-            
-            
             catch {
                 print(error)
             }
-            
-            
-            }.resume()
+        }.resume()
     }
 
 }

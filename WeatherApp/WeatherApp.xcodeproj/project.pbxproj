@@ -31,6 +31,8 @@
 		DB45765D1E295E820035D144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB45765C1E295E820035D144 /* Assets.xcassets */; };
 		DB4576601E295E820035D144 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB45765E1E295E820035D144 /* LaunchScreen.storyboard */; };
 		DB4576681E2963CB0035D144 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4576671E2963CB0035D144 /* Models.swift */; };
+		DB8780C11E7B3C2F00517B6F /* NightBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = DB8780C01E7B3C2F00517B6F /* NightBackground.png */; };
+		DB8780C31E7B427C00517B6F /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB8780C21E7B427C00517B6F /* WeatherCell.xib */; };
 		DBF3D5B31E79C178006FAAC8 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3D5B21E79C178006FAAC8 /* Util.swift */; };
 		DBF3D5B51E79CCB4006FAAC8 /* DayForcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF3D5B41E79CCB4006FAAC8 /* DayForcastViewController.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,8 @@
 		DB45765F1E295E820035D144 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB4576611E295E820035D144 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB4576671E2963CB0035D144 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		DB8780C01E7B3C2F00517B6F /* NightBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NightBackground.png; sourceTree = "<group>"; };
+		DB8780C21E7B427C00517B6F /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
 		DBF3D5B21E79C178006FAAC8 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		DBF3D5B41E79CCB4006FAAC8 /* DayForcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayForcastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,14 +105,24 @@
 				DB4576671E2963CB0035D144 /* Models.swift */,
 				DBF3D5B41E79CCB4006FAAC8 /* DayForcastViewController.swift */,
 				DB4576591E295E820035D144 /* Main.storyboard */,
+				DB8780C21E7B427C00517B6F /* WeatherCell.xib */,
 				DBF3D5B21E79C178006FAAC8 /* Util.swift */,
 				DB45765C1E295E820035D144 /* Assets.xcassets */,
 				DB45765E1E295E820035D144 /* LaunchScreen.storyboard */,
 				DB4576611E295E820035D144 /* Info.plist */,
+				DB8780BF1E7B3C0800517B6F /* Images */,
+			);
+			path = WeatherApp;
+			sourceTree = "<group>";
+		};
+		DB8780BF1E7B3C0800517B6F /* Images */ = {
+			isa = PBXGroup;
+			children = (
 				DB310D1E1E43BE2800AB96E7 /* 01d.png */,
 				DB310D1F1E43BE2800AB96E7 /* 01n.png */,
 				DB310D201E43BE2800AB96E7 /* 02d.png */,
 				DB310D211E43BE2800AB96E7 /* 02n.png */,
+				DB8780C01E7B3C2F00517B6F /* NightBackground.png */,
 				DB310D221E43BE2800AB96E7 /* 03d.png */,
 				DB310D231E43BE2800AB96E7 /* 03n.png */,
 				DB310D241E43BE2800AB96E7 /* 04d.png */,
@@ -124,7 +138,7 @@
 				DB310D2E1E43BE2800AB96E7 /* 50d.png */,
 				DB310D2F1E43BE2800AB96E7 /* 50n.png */,
 			);
-			path = WeatherApp;
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +209,7 @@
 				DB310D411E43BE2800AB96E7 /* 50n.png in Resources */,
 				DB310D381E43BE2800AB96E7 /* 09d.png in Resources */,
 				DB4576601E295E820035D144 /* LaunchScreen.storyboard in Resources */,
+				DB8780C31E7B427C00517B6F /* WeatherCell.xib in Resources */,
 				DB310D351E43BE2800AB96E7 /* 03n.png in Resources */,
 				DB310D331E43BE2800AB96E7 /* 02n.png in Resources */,
 				DB310D3D1E43BE2800AB96E7 /* 11n.png in Resources */,
@@ -202,6 +217,7 @@
 				DB310D391E43BE2800AB96E7 /* 09n.png in Resources */,
 				DB310D3B1E43BE2800AB96E7 /* 10n.png in Resources */,
 				DB310D3E1E43BE2800AB96E7 /* 13d.png in Resources */,
+				DB8780C11E7B3C2F00517B6F /* NightBackground.png in Resources */,
 				DB45765D1E295E820035D144 /* Assets.xcassets in Resources */,
 				DB45765B1E295E820035D144 /* Main.storyboard in Resources */,
 				DB310D3A1E43BE2800AB96E7 /* 10d.png in Resources */,

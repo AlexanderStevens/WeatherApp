@@ -65,15 +65,16 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
                     let date_Time = firstForcast?.date_text!
                     print("First Forcast Time is:\(date_Time)")
                     self.daysArray = convertedDays
-                   
+                    
+                    DispatchQueue.main.async(execute: { ()-> Void in
+                        self.myActivityIndicator?.stopAnimating()
+                        self.tableView.reloadData()
+                        self.cityLabel.text = location
+                        self.cityLabel.isHidden = false
+                        
+                    })
                 })
-
-                self.myActivityIndicator?.stopAnimating()
-                self.tableView.reloadData()
-
             }
-            
-        
         })
     }
     
@@ -110,10 +111,11 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier:  weatherID) as! WeatherCell
             let day = daysArray[indexPath.item-1]
-            let forcast = day.first
-            print(forcast?.date_text!)
-            cell.textLabel?.text = forcast?.weather!
-            cell.detailTextLabel?.text = forcast?.weatherDescription!
+            if indexPath.item == 1 {
+                let forcast = day.first
+                
+            }
+           
             
             return cell
         }
@@ -129,6 +131,7 @@ class CellHeader: UITableViewCell {
 
 class WeatherCell: UITableViewCell {
     // Image 
+    
     
     
     
