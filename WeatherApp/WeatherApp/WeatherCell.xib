@@ -12,16 +12,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="160" id="B9U-vd-Gxm" customClass="WeatherCell" customModule="WeatherApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="163"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellWID" rowHeight="160" id="B9U-vd-Gxm" customClass="WeatherCell" customModule="WeatherApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="161"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B9U-vd-Gxm" id="opV-qa-77k">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rY0-t9-79K">
-                        <rect key="frame" x="8" y="19" width="125" height="125"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDj-9a-FhX">
                         <rect key="frame" x="139" y="123" width="46" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -46,26 +43,35 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rY0-t9-79K">
+                        <rect key="frame" x="8" y="17" width="125" height="125"/>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="XbL-Z0-bQc" secondAttribute="bottom" constant="11" id="2gg-hc-Uy1"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="XbL-Z0-bQc" secondAttribute="bottom" constant="7" id="2gg-hc-Uy1"/>
                     <constraint firstItem="rY0-t9-79K" firstAttribute="leading" secondItem="opV-qa-77k" secondAttribute="leadingMargin" id="5Se-Vt-GWq"/>
                     <constraint firstItem="EDj-9a-FhX" firstAttribute="leading" secondItem="rY0-t9-79K" secondAttribute="trailing" constant="6" id="5XM-pA-JBz"/>
                     <constraint firstItem="0sc-fA-QgD" firstAttribute="leading" secondItem="CgQ-OU-ppf" secondAttribute="trailing" constant="28" id="6un-KQ-1FF"/>
                     <constraint firstItem="CgQ-OU-ppf" firstAttribute="top" secondItem="opV-qa-77k" secondAttribute="topMargin" constant="11" id="C6m-XX-fQK"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="EDj-9a-FhX" secondAttribute="bottom" constant="11" id="En5-1P-7Kn"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="rY0-t9-79K" secondAttribute="bottom" constant="11" id="Gh1-fA-QsO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="EDj-9a-FhX" secondAttribute="bottom" constant="7" id="En5-1P-7Kn"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="rY0-t9-79K" secondAttribute="bottom" constant="9" id="Gh1-fA-QsO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="XbL-Z0-bQc" secondAttribute="trailing" id="Tbi-xc-W0m"/>
                     <constraint firstItem="0sc-fA-QgD" firstAttribute="top" secondItem="opV-qa-77k" secondAttribute="topMargin" constant="41" id="afo-a3-ghG"/>
-                    <constraint firstItem="XbL-Z0-bQc" firstAttribute="top" secondItem="0sc-fA-QgD" secondAttribute="bottom" constant="53" id="jJk-aw-luP"/>
                     <constraint firstAttribute="trailingMargin" secondItem="0sc-fA-QgD" secondAttribute="trailing" constant="46" id="pyh-hr-MYQ"/>
                     <constraint firstItem="CgQ-OU-ppf" firstAttribute="leading" secondItem="rY0-t9-79K" secondAttribute="trailing" constant="18" id="vDZ-Sw-2Zd"/>
-                    <constraint firstItem="rY0-t9-79K" firstAttribute="top" secondItem="opV-qa-77k" secondAttribute="topMargin" constant="11" id="wUx-Wc-I5h"/>
+                    <constraint firstItem="rY0-t9-79K" firstAttribute="top" secondItem="opV-qa-77k" secondAttribute="topMargin" constant="9" id="wUx-Wc-I5h"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.8487491904145078" green="0.8487491904145078" blue="0.8487491904145078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" red="0.12550599093264247" green="0.12550599093264247" blue="0.12550599093264247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="42.5" y="-261.5"/>
+            <connections>
+                <outlet property="dayLabel" destination="EDj-9a-FhX" id="Wfo-Qc-VXR"/>
+                <outlet property="descriptionLabel" destination="XbL-Z0-bQc" id="acW-8d-KE3"/>
+                <outlet property="iconIV" destination="rY0-t9-79K" id="aTH-BX-omx"/>
+                <outlet property="tempLabel" destination="CgQ-OU-ppf" id="sRu-82-1uL"/>
+                <outlet property="weatherLabel" destination="0sc-fA-QgD" id="rBI-Cw-zEc"/>
+            </connections>
+            <point key="canvasLocation" x="42.5" y="-262"/>
         </tableViewCell>
     </objects>
 </document>

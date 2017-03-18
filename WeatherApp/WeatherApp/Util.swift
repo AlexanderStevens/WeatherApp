@@ -17,8 +17,6 @@ class Util{
         print(jumbledDays.count)
         var dayForcastArray = [Forcast]()
         
-        //Last Dict is not added
-        
         
     for item in jumbledDays {
         
@@ -45,4 +43,9 @@ class Util{
        
         })
     }
+    
+    //Convert date to day
+    //Convert to celcius
+    
+    
 }

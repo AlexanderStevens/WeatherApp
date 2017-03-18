@@ -10,7 +10,11 @@ import UIKit
 
 class WeatherTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    //Save search location
+    //Save search locations
+    //Location Services
+    //Handle no internet connection - error message turn of 3g Data
+    //Design and Create Custom Cells 
+    
     
     @IBOutlet weak var serachField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +32,7 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource = self
         tableView.register(CellHeader.self, forCellReuseIdentifier: cellHeadID)
         tableView.register(WeatherCell.self, forCellReuseIdentifier: weatherID)
+        tableView.register(WeatherCell.self, forCellReuseIdentifier: weatherID)
         tableView.reloadData()
         // Create and register nibs
         
@@ -35,21 +40,15 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBAction func searchForResults(_ sender: UIButton) {
         
-        
         print("reguest made")
         myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         myActivityIndicator!.center = view.center
         myActivityIndicator!.startAnimating()
         view.addSubview(myActivityIndicator!)
         
-        
         let location :String = self.serachField.text!
         
         let serialQueue = DispatchQueue(label: "com.queue.Serial")
-        
-        
-        //Put weathe request in sync.sync 
-        
         
         WeatherObject.fetchWeatherResults(location:location, completionHandler: {forcastArray in
             print("return from Weather Call")
@@ -97,28 +96,54 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DayArray Count:")
         print(daysArray.count)
-        let rows = daysArray.count + 1
+        let rows = daysArray.count
         return rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("In cell for row")
-        if indexPath.item == 0 {
+//        print("In cell for row")
+//        if indexPath.item == 0 {
+//            
+//            let cell = tableView.dequeueReusableCell(withIdentifier:  cellHeadID) as! CellHeader
+//            return cell
+//        }
+//        else {
+//            let cell = tableView.dequeueReusableCell(withIdentifier:  weatherID) as! WeatherCell
+        let cell = Bundle.main.loadNibNamed("WeatherCell", owner: self, options: nil)?.first as! WeatherCell
+            cell.backgroundColor = UIColor.clear
+            let day = daysArray[indexPath.item]
         
-            let cell = tableView.dequeueReusableCell(withIdentifier:  cellHeadID) as! CellHeader
-            return cell
-        }
-        else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:  weatherID) as! WeatherCell
-            let day = daysArray[indexPath.item-1]
-            if indexPath.item == 1 {
-                let forcast = day.first
+            if let forcast = day.first {
                 
-            }
-           
+                if forcast.iconName != nil {
+                    print(forcast.iconName!)
+                    cell.iconIV?.image = UIImage(named: forcast.iconName!)
+                }
+                if forcast.temperature != nil {
+                    let temp = String(describing: forcast.temperature!)
+                    cell.tempLabel?.text = temp
+                }
             
+                if forcast.date_text != nil {
+                    print(forcast.date_text!)
+                    cell.dayLabel?.text = forcast.date_text!
+                }
+                if forcast.weatherDescription != nil {
+                    print(forcast.weatherDescription!)
+                    cell.descriptionLabel?.text = forcast.weatherDescription!
+                }
+                if forcast.weather != nil {
+                    print(forcast.weather!)
+                    cell.weatherLabel?.text = forcast.weather!
+                }
+            }
+        
             return cell
-        }
+//        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(160.0)
     }
 }
 
@@ -131,6 +156,11 @@ class CellHeader: UITableViewCell {
 
 class WeatherCell: UITableViewCell {
     // Image 
+    @IBOutlet weak var iconIV: UIImageView!
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var weatherLabel: UILabel!
     
     
     
