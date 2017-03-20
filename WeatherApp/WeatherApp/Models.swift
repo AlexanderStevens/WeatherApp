@@ -15,17 +15,15 @@ class WeatherObject:NSObject {
         
         let appKey = "223ae3b1b25cc6eddaa67ea08943b218"
         var urlString :String {
-            return "http://api.openweathermap.org/data/2.5/forecast?APPID=\(appKey)&q=\(location)&mode=json"
+            return "http://api.openweathermap.org/data/2.5/forecast?APPID=\(appKey)&q=\(location)&mode=json&units=metric"
         }
  
-        
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL) {data,response,error in
+            URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL) {data,response,error in
             
             if error != nil {
                 print(error!)
                 return
             }
-            
             do {
                 print("no error")
                 var forcastArray = [Forcast]()
@@ -76,11 +74,9 @@ class WeatherObject:NSObject {
                     forcastArray.append(forcast)
                     print("added to forcast array")
                     print(forcastArray.count)
-                    
                 }
                 
                 DispatchQueue.main.async(execute: { ()-> Void in
-                    
                     completionHandler(forcastArray)
                     print("data retuned")
                 })
@@ -88,6 +84,7 @@ class WeatherObject:NSObject {
             }
             catch {
                 print(error)
+                return
             }
         }.resume()
     }

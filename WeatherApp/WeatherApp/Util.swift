@@ -44,8 +44,26 @@ class Util{
         })
     }
     
+    static func convertDateToDay(date:String?)-> String {
+        print("In convert Date")
+        var returnString = ""
+        if date != nil {
+            if let day = date {
+                returnString = day
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
+                if let newDate = dateFormatter.date(from: day) {
+                    print("Date\(newDate)")
+                    returnString = dateFormatter.string(from: newDate)
+                    print(returnString)
+                }
+            }
+        }
+        return returnString
+        
+    }
+    
     //Convert date to day
     //Convert to celcius
-    
-    
 }
+

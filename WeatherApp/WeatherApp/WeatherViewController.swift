@@ -19,11 +19,13 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var serachField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var background: UIImageView!
     
     let cellHeadID = "cellHID"
     let weatherID = "cellWID"
     var daysArray = [[Forcast]]()
     var myActivityIndicator : UIActivityIndicatorView?
+    let serialQueue = DispatchQueue(label: "com.queue.Serial")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,6 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CellHeader.self, forCellReuseIdentifier: cellHeadID)
-        tableView.register(WeatherCell.self, forCellReuseIdentifier: weatherID)
         tableView.register(WeatherCell.self, forCellReuseIdentifier: weatherID)
         tableView.reloadData()
         // Create and register nibs
@@ -48,13 +49,11 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
         
         let location :String = self.serachField.text!
         
-        let serialQueue = DispatchQueue(label: "com.queue.Serial")
-        
         WeatherObject.fetchWeatherResults(location:location, completionHandler: {forcastArray in
             print("return from Weather Call")
             print(forcastArray.count)
             
-            serialQueue.sync {
+            self.serialQueue.sync {
                
                 Util.convertToDays(jumbledDays: forcastArray, completionHandler: {convertedDays  in
                     print("Converted Days Array Count")
@@ -79,16 +78,20 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func showDayDetailForApp(_ day:[Forcast]) {
         
-        let dayForcastViewController = DayForcastViewController()
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
+        
+        let dayForcastViewController = storyBoard.instantiateViewController(withIdentifier: "detailView") as! DayForcastViewController
         dayForcastViewController.dayForcast = day
-        navigationController?.pushViewController(dayForcastViewController, animated: true)
+        dayForcastViewController.location = cityLabel?.text!
+        self.present(dayForcastViewController, animated:true, completion:nil)
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Segue to day breakdown
-        if indexPath.item > 0 {
-        showDayDetailForApp(daysArray[indexPath.item])
+        if daysArray.count > 0 {
+            showDayDetailForApp(daysArray[indexPath.item])
         
         }
     }
@@ -101,45 +104,50 @@ class WeatherTableViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        print("In cell for row")
-//        if indexPath.item == 0 {
-//            
-//            let cell = tableView.dequeueReusableCell(withIdentifier:  cellHeadID) as! CellHeader
-//            return cell
-//        }
-//        else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier:  weatherID) as! WeatherCell
+
         let cell = Bundle.main.loadNibNamed("WeatherCell", owner: self, options: nil)?.first as! WeatherCell
             cell.backgroundColor = UIColor.clear
-            let day = daysArray[indexPath.item]
+        let day = daysArray[indexPath.item]
         
-            if let forcast = day.first {
+        
+        
+        if let forcast = day.first {
                 
-                if forcast.iconName != nil {
-                    print(forcast.iconName!)
-                    cell.iconIV?.image = UIImage(named: forcast.iconName!)
-                }
-                if forcast.temperature != nil {
-                    let temp = String(describing: forcast.temperature!)
-                    cell.tempLabel?.text = temp
-                }
-            
-                if forcast.date_text != nil {
-                    print(forcast.date_text!)
-                    cell.dayLabel?.text = forcast.date_text!
-                }
-                if forcast.weatherDescription != nil {
-                    print(forcast.weatherDescription!)
-                    cell.descriptionLabel?.text = forcast.weatherDescription!
-                }
-                if forcast.weather != nil {
-                    print(forcast.weather!)
-                    cell.weatherLabel?.text = forcast.weather!
+            if forcast.iconName != nil {
+                print(forcast.iconName!)
+                cell.iconIV?.image = UIImage(named: forcast.iconName!)
+            }
+            if forcast.temperature != nil {
+                if let decimalTemp = forcast.temperature?.doubleValue{
+                let temp = String(format: "%.2f", decimalTemp)
+                print(temp)
+                let finalTemp = temp.appending("°")
+                    cell.tempLabel?.text = finalTemp
                 }
             }
+            
+            if forcast.date_text != nil {
+                print(forcast.date_text!)
+                self.serialQueue.sync {
+                    
+                    let dayString = Util.convertDateToDay(date: forcast.date_text)
+                    DispatchQueue.main.async(execute: { ()-> Void in
+                     cell.dayLabel?.text = dayString
+                    })
+                }
+                
+            }
+            if forcast.weatherDescription != nil {
+                    print(forcast.weatherDescription!)
+                    cell.descriptionLabel?.text = forcast.weatherDescription!
+            }
+            if forcast.weather != nil {
+                print(forcast.weather!)
+                cell.weatherLabel?.text = forcast.weather!
+            }
+        }
         
-            return cell
-//        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
